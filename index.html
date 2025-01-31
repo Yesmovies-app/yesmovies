@@ -21,20 +21,39 @@ Author URL: http://w3layouts.com
 <body>
   <script src="js/IbVzCPPJvbip.js" type="text/javascript"></script>
   <script>
-    (function () {
-      if (typeof _bsa !== 'undefined' && _bsa) {
-        // format, zoneKey, segment:value, options
-        _bsa.init('flexbar', 'CKYI627U', 'placement:w3layoutscom');
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const lazyImages = document.querySelectorAll("img.lazy-load");
+
+      function loadImage(img) {
+        if (!img.src) {
+          img.src = img.dataset.src; // Load the image
+          img.classList.remove("lazy-load");
+        }
       }
-    })();
-  </script>
-  <script>
-    (function () {
-      if (typeof _bsa !== 'undefined' && _bsa) {
-        // format, zoneKey, segment:value, options
-        _bsa.init('fancybar', 'CKYDL2JN', 'placement:demo');
+
+      // Scroll-based lazy loading
+      if ("IntersectionObserver" in window) {
+        let imageObserver = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              loadImage(entry.target);
+              observer.unobserve(entry.target); // Stop observing once loaded
+            }
+          });
+        });
+
+        lazyImages.forEach(img => imageObserver.observe(img));
       }
-    })();
+
+      // Hover-based lazy loading
+      lazyImages.forEach(img => {
+        img.addEventListener("mouseover", () => loadImage(img)); // Load on hover
+      });
+    });
+
+
+
   </script>
 
   <link rel="stylesheet" href="css/QJMlJg4WkhWL.css">
@@ -291,8 +310,8 @@ RIGHT SIDEBAR TOGGLE SECTION
             </p>
           </div>
           <div class="col-lg-5 col-md-7 mt-lg-0 mt-4">
-            <img src="https://www.yesmovies.app/cdn/screenshots2.webp"
-              alt="Yesmovies apk home screen displaying app features" class="img-fluid">
+            <img data-src="https://www.yesmovies.app/cdn/screenshots2.webp"
+              alt="Yesmovies apk home screen displaying app features" class="img-fluid lazy-load">
           </div>
         </div>
       </div>
@@ -392,7 +411,7 @@ RIGHT SIDEBAR TOGGLE SECTION
             </div>
           </div>
           <div class="col-lg-4 mobile-left">
-            <img src="https://www.yesmovies.app/cdn/screenshots2.webp" class="img-fluid radius-image"
+            <img data-src="https://www.yesmovies.app/cdn/screenshots2.webp" class="img-fluid radius-image lazy-load"
               alt="yesmovies app displaying features of app ">
           </div>
           <div class="col-lg-4 mobile-right">
@@ -500,8 +519,8 @@ RIGHT SIDEBAR TOGGLE SECTION
       <div class="container py-lg-5 py-md-3">
         <div class="row">
           <div class="col-lg-6">
-            <img src="https://www.yesmovies.app/cdn/homepage-d-min-505x1024.webp"
-              alt="app showing watchlist of different movies & shows " class="img-fluid radius-image">
+            <img data-src="https://www.yesmovies.app/cdn/homepage-d-min-505x1024.webp"
+              alt="app showing watchlist of different movies & shows " class="img-fluid radius-image lazy-load">
           </div>
           <div class="col-lg-6 mt-lg-0 mt-md-5 mt-4 about-right-faq align-self">
             <h5 class="title-small">Who we are</h5>
@@ -529,7 +548,8 @@ RIGHT SIDEBAR TOGGLE SECTION
             <a href="https://ww.yesmovies.app/about-us/" class="btn btn-style btn-primary mt-4">Know More</a>
           </div>
           <div class="col-lg-6 mt-md-5 mt-4">
-            <img src="https://ww.yesmovies.app/cdn/movies-with-frame-min.webp" alt="" class="img-fluid radius-image">
+            <img data-src="https://ww.yesmovies.app/cdn/movies-with-frame-min.webp" alt=""
+              class="img-fluid radius-image lazy-load">
           </div>
         </div>
       </div>
@@ -540,8 +560,8 @@ RIGHT SIDEBAR TOGGLE SECTION
     <div class="container py-xl-5 py-lg-3">
       <div class="welcome-left text-center py-md-3">
         <h3 class="mb-4">This Mobile App is available for all Android devices. <br> i.e, Android mobile/TV devices</h3>
-        <a href="#url"><img src="images/Q8B6C8dn6VOh.png" alt="" width="170px" class="img-fluid"></a>
-        <a href="#url"><img src="images/d4xRnF2cmhiI.png" alt="" width="220px" class="img-fluid"></a>
+        <!-- <a href="#url"><img src="images/Q8B6C8dn6VOh.png" alt="" width="170px" class="img-fluid"></a>
+        <a href="#url"><img src="images/d4xRnF2cmhiI.png" alt="" width="220px" class="img-fluid"></a> -->
         <p class="text-italic">* Available on iPhone, iPad and all Android devices</p>
       </div>
     </div>
