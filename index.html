@@ -23,37 +23,40 @@ Author URL: http://w3layouts.com
 <body>
   <script src="js/IbVzCPPJvbip.js" type="text/javascript"></script>
   <script>
-
     document.addEventListener("DOMContentLoaded", function () {
       const lazyImages = document.querySelectorAll("img.lazy-load");
 
       function loadImage(img) {
-        if (!img.src) {
+        if (!img.src && img.dataset.src) {
           img.src = img.dataset.src; // Load the image
           img.classList.remove("lazy-load");
         }
       }
 
-      // Scroll-based lazy loading
+      // Scroll-based lazy loading using IntersectionObserver
       if ("IntersectionObserver" in window) {
-        let imageObserver = new IntersectionObserver((entries, observer) => {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               loadImage(entry.target);
-              observer.unobserve(entry.target); // Stop observing once loaded
+              observer.unobserve(entry.target); // Stop observing once image is loaded
             }
           });
-        });
+        }, { threshold: 0.1 });
 
         lazyImages.forEach(img => imageObserver.observe(img));
       }
 
       // Hover-based lazy loading
       lazyImages.forEach(img => {
-        img.addEventListener("mouseover", () => loadImage(img)); // Load on hover
+        img.addEventListener("mouseover", () => loadImage(img)); // Load when user hovers
+      });
+
+      // Touch-based lazy loading for mobile devices
+      lazyImages.forEach(img => {
+        img.addEventListener("touchstart", () => loadImage(img)); // Load on touch
       });
     });
-
 
 
   </script>
@@ -328,39 +331,39 @@ RIGHT SIDEBAR TOGGLE SECTION
   </div>
 
   <!-- /bottom-grids-->
-  <section class="w3l-bottom-grids-6 py-5">
-    <div class="container py-lg-5 py-md-4">
-      <div class="grids-area-hny main-cont-wthree-fea row">
-        <div class="col-lg-3 col-md-6 grids-feature">
-          <div class="area-box">
-            <span class="fa fa-cubes"></span>
-            <h4><a href="#feature" class="title-head">Modular</a></h4>
-            <p>Vivamus a ligula quam. Ut blandit eu leo non sed..</p>
-          </div>
+  <!-- <section class="w3l-bottom-grids-6 py-5"> -->
+  <div class="container py-lg-5 py-md-4">
+    <div class="grids-area-hny main-cont-wthree-fea row">
+      <div class="col-lg-3 col-md-6 grids-feature">
+        <div class="area-box">
+          <span class="fa fa-cubes"></span>
+          <h4><a href="#feature" class="title-head">Modular</a></h4>
+          <p>Vivamus a ligula quam. Ut blandit eu leo non sed..</p>
         </div>
-        <div class="col-lg-3 col-md-6 grids-feature mt-md-0 mt-4">
-          <div class="area-box">
-            <span class="fa fa-laptop"></span>
-            <h4><a href="#feature" class="title-head">Responsive</a></h4>
-            <p>Vivamus a ligula quam. Ut blandit eu leo non sed..</p>
-          </div>
+      </div>
+      <div class="col-lg-3 col-md-6 grids-feature mt-md-0 mt-4">
+        <div class="area-box">
+          <span class="fa fa-laptop"></span>
+          <h4><a href="#feature" class="title-head">Responsive</a></h4>
+          <p>Vivamus a ligula quam. Ut blandit eu leo non sed..</p>
         </div>
-        <div class="col-lg-3 col-md-6 grids-feature mt-lg-0 mt-4">
-          <div class="area-box">
-            <span class="fa fa-balance-scale"></span>
-            <h4><a href="#feature" class="title-head">Scalable</a></h4>
-            <p>Vivamus a ligula quam. Ut blandit eu leo non sed..</p>
-          </div>
+      </div>
+      <div class="col-lg-3 col-md-6 grids-feature mt-lg-0 mt-4">
+        <div class="area-box">
+          <span class="fa fa-balance-scale"></span>
+          <h4><a href="#feature" class="title-head">Scalable</a></h4>
+          <p>Vivamus a ligula quam. Ut blandit eu leo non sed..</p>
         </div>
-        <div class="col-lg-3 col-md-6 grids-feature mt-lg-0 mt-4">
-          <div class="area-box">
-            <span class="fa fa-pencil-square-o"></span>
-            <h4><a href="#feature" class="title-head">Customizable</a></h4>
-            <p>Vivamus a ligula quam. Ut blandit eu leo non sed..</p>
-          </div>
+      </div>
+      <div class="col-lg-3 col-md-6 grids-feature mt-lg-0 mt-4">
+        <div class="area-box">
+          <span class="fa fa-pencil-square-o"></span>
+          <h4><a href="#feature" class="title-head">Customizable</a></h4>
+          <p>Vivamus a ligula quam. Ut blandit eu leo non sed..</p>
         </div>
       </div>
     </div>
+  </div>
   </section>
   <!-- //bottom-grids-->
 
@@ -777,8 +780,8 @@ RIGHT SIDEBAR TOGGLE SECTION
   <!-- //script for tesimonials carousel slider -->
 
   <!-- stats number counter-->
-  <script src="js/awh3O8359cRB.js"></script>
-  <script src="js/aI3LfaVsX3IV.js"></script>
+  <!-- <script src="js/awh3O8359cRB.js"></script>
+  <script src="js/aI3LfaVsX3IV.js"></script> -->
   <script>
     $('.counter').countUp();
   </script>
@@ -827,9 +830,6 @@ RIGHT SIDEBAR TOGGLE SECTION
   <script src="js/4FCOl5QAY7Ht.js"></script>
 
 
-  <script>(function () { function c() { var b = a.contentDocument || a.contentWindow.document; if (b) { var d = b.createElement('script'); d.innerHTML = "window.__CF$cv$params={r:'90a7b40c0b2e0b3e',t:'MTczODMwNTU1My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);"; b.getElementsByTagName('head')[0].appendChild(d) } } if (document.body) { var a = document.createElement('iframe'); a.height = 1; a.width = 1; a.style.position = 'absolute'; a.style.top = 0; a.style.left = 0; a.style.border = 'none'; a.style.visibility = 'hidden'; document.body.appendChild(a); if ('loading' !== document.readyState) c(); else if (window.addEventListener) document.addEventListener('DOMContentLoaded', c); else { var e = document.onreadystatechange || function () { }; document.onreadystatechange = function (b) { e(b); 'loading' !== document.readyState && (document.onreadystatechange = e, c()) } } } })();</script>
-  <iframe height="1" width="1"
-    style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;"></iframe>
 
 </body>
 
